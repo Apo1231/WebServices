@@ -11,7 +11,8 @@ const stylesButtonSecondary = {
     borderRadius: '10px',
     color: '#363636',
     border: 'none',
-    padding: '2px 10px'
+    padding: '2px 10px',
+    cursor: 'pointer'
 };
 
 function Button({type, action, text = "Wihooo"}) {
