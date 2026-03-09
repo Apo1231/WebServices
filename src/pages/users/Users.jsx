@@ -1,15 +1,48 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../security/authContex";
 
+function Users() {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
 
-function Users(){
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+    };
+
     return (
         <div>
-            <h1>Users</h1>
-            <div>
-                <Outlet />
-            </div>
+            <nav style={{
+                display: "flex",
+                gap: "16px",
+                alignItems: "center",
+                padding: "12px 24px",
+                background: "#1976D2",
+                color: "#fff"
+            }}>
+                <NavLink to="/dashboard" style={{ color: "#fff", textDecoration: "none", fontWeight: 600 }}>
+                    Dashboard
+                </NavLink>
+                <NavLink to="/users/list" style={{ color: "#fff", textDecoration: "none", fontWeight: 600 }}>
+                    Usuarios
+                </NavLink>
+                <button onClick={handleLogout} style={{
+                    marginLeft: "auto",
+                    padding: "6px 14px",
+                    background: "transparent",
+                    border: "1px solid #fff",
+                    color: "#fff",
+                    borderRadius: 6,
+                    cursor: "pointer"
+                }}>
+                    Cerrar sesión
+                </button>
+            </nav>
+
+            {/* Aquí se renderizan UserList y UserFindOne */}
+            <Outlet />
         </div>
-    )
+    );
 }
 
 export default Users;

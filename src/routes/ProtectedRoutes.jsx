@@ -1,14 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-
-function ProtectedRoutes({ isAllowed }){
-
-    if(!isAllowed){
-        return <Navigate to='login' />
+function ProtectedRoutes({ isAllowed }) {
+    if (!isAllowed) {
+        return <Navigate to="/login" replace />;
     }
-
-    return <Outlet />
+    return <Outlet />;
 }
 
-
 export default ProtectedRoutes;
+

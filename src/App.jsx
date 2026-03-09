@@ -1,4 +1,3 @@
-import "./components/components-style.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -11,34 +10,28 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { useAuth } from "./security/authContex";
 
 function App() {
-  const { isLoggedIn : isAllowed } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   return (
-    <>
-      {isAllowed ? (
-        <Routes>
-          <Route path="/login" element={<Navigate to="/dashboard" />} />
-          
-          <Route element={<ProtectedRoutes isAllowed={isAllowed} />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
+      <Routes>
+        {/* ── Rutas públicas ── */}
+        <Route path="/" element={<Home />} />
+        <Route
+            path="/login"
+            element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />}
+        />
 
+        {/* ── Rutas protegidas por wrapper ─── */}
+        <Route element={<ProtectedRoutes isAllowed={isLoggedIn} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />}>
             <Route path="list" element={<UserList />} />
             <Route path=":id" element={<UserFindOne />} />
           </Route>
+        </Route>
 
-          <Route path="/" element={<Navigate to='/dashboard' />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Navigate to='/' />} />
-        </Routes>
-      )}
-    </>
+        <Route path="*" element={<Page404 />} />
+      </Routes>
   );
 }
 
