@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { getAllUsers, deleteUser, createUser } from "../../services/fakestore";
 import Swal from "sweetalert2";
 
-// ── Componente Modal reutilizable
 function Modal({ isOpen, onClose, children }) {
     if (!isOpen) return null;
     return (
@@ -22,7 +21,6 @@ const ms = {
     close: { position: "absolute", top: 12, right: 16, background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: "#666" },
 };
 
-// ── Componente Input reutilizable
 function InputField({ label, name, type = "text", value, onChange, required }) {
     return (
         <div style={{ marginBottom: 14 }}>
@@ -40,7 +38,6 @@ function InputField({ label, name, type = "text", value, onChange, required }) {
     );
 }
 
-// ── Componente formulario de crear usuario
 const emptyForm = { email: "", username: "", password: "", firstname: "", lastname: "", phone: "", city: "", street: "" };
 
 function CreateUserForm({ onSuccess, onClose }) {
@@ -91,7 +88,7 @@ function CreateUserForm({ onSuccess, onClose }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h3 style={{ marginBottom: 20, color: "#333" }}>➕ Nuevo Usuario</h3>
+            <h3 style={{ marginBottom: 20, color: "#333" }}>Nuevo Usuario</h3>
             <InputField label="Nombre" name="firstname" value={form.firstname} onChange={handleChange} required />
             <InputField label="Apellido" name="lastname" value={form.lastname} onChange={handleChange} required />
             <InputField label="Email" name="email" type="email" value={form.email} onChange={handleChange} required />
@@ -114,7 +111,6 @@ function CreateUserForm({ onSuccess, onClose }) {
     );
 }
 
-// ── Página principal de lista de usuarios
 function UserList() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
@@ -156,18 +152,17 @@ function UserList() {
         }
     };
 
-    if (loading) return <div style={{ textAlign: "center", padding: 60, fontSize: 18 }}>⏳ Cargando usuarios...</div>;
+    if (loading) return <div style={{ textAlign: "center", padding: 60, fontSize: 18 }}>Cargando usuarios...</div>;
 
     return (
         <div style={{ padding: "30px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-                <h2 style={{ margin: 0 }}>👥 Usuarios</h2>
+                <h2 style={{ margin: 0 }}>Usuarios</h2>
                 <button onClick={() => setShowModal(true)}
                         style={{ padding: "10px 20px", background: "#1976D2", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontWeight: 600, fontSize: 14 }}>
-                    ➕ Crear Usuario
+                    Crear Usuario
                 </button>
             </div>
-
             <div style={{ overflowX: "auto", borderRadius: 10, boxShadow: "0 2px 12px rgba(0,0,0,0.08)" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", background: "#fff" }}>
                     <thead>
@@ -188,11 +183,11 @@ function UserList() {
                             <td style={td}>
                                 <button onClick={() => navigate(`/users/${user.id}`)}
                                         style={{ ...btnStyle, background: "#1976D2", marginRight: 6 }}>
-                                    👁 Ver
+                                    Ver
                                 </button>
                                 <button onClick={() => handleDelete(user.id, `${user.name.firstname} ${user.name.lastname}`)}
                                         style={{ ...btnStyle, background: "#e53935" }}>
-                                    🗑 Borrar
+                                    Borrar
                                 </button>
                             </td>
                         </tr>
@@ -200,7 +195,6 @@ function UserList() {
                     </tbody>
                 </table>
             </div>
-
             <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
                 <CreateUserForm
                     onSuccess={() => { setShowModal(false); fetchUsers(); }}

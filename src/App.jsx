@@ -7,32 +7,23 @@ import UserFindOne from "./pages/users/UserFindOne";
 import UserList from "./pages/users/UserList";
 import Users from "./pages/users/Users";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
-import { useAuth } from "./security/authContex";
+import { useAuth } from "./security/AuthContex";
 
 function App() {
-  const { isLoggedIn } = useAuth();
+    const { isLoggedIn } = useAuth();
 
-  return (
-      <Routes>
-        {/* ── Rutas públicas ── */}
-        <Route path="/" element={<Home />} />
-        <Route
-            path="/login"
-            element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />}
-        />
-
-        {/* ── Rutas protegidas por wrapper ─── */}
-        <Route element={<ProtectedRoutes isAllowed={isLoggedIn} />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/users" element={<Users />}>
-            <Route path="list" element={<UserList />} />
-            <Route path=":id" element={<UserFindOne />} />
-          </Route>
-        </Route>
-
-        <Route path="*" element={<Page404 />} />
-      </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />} />
+            <Route element={<ProtectedRoutes isAllowed={isLoggedIn} />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/users/:id" element={<UserFindOne />} />
+            </Route>
+            <Route path="*" element={<Page404 />} />
+        </Routes>
+    );
 }
 
 export default App;

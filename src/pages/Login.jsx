@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../security/authContex";
+import { useAuth } from "../security/AuthContex";
 import Swal from "sweetalert2";
 
 function Login() {
@@ -64,8 +64,9 @@ function Login() {
                     </button>
                 </form>
                 <p style={{ textAlign: "center", marginTop: 16, fontSize: 13, color: "#999" }}>
-                    Usuario de prueba: <b>mor_2313</b> / <b>83r5^_</b>
+                    Usuario de prueba: <b>mor_2314</b> / <b>83r5^_</b>
                 </p>
+
                 <p style={{ textAlign: "center", marginTop: 8 }}>
                     <Link to="/" style={{ color: "#1976D2", fontSize: 13 }}>← Volver al inicio</Link>
                 </p>

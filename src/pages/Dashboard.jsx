@@ -1,4 +1,4 @@
-import { useAuth } from "../security/authContex";
+import { useAuth } from "../security/AuthContex";
 
 function Dashboard() {
     const { logout} = useAuth();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AuthContext } from "./authContex";
+import { AuthContext } from "./AuthContex.js";
 import { loginService } from "../services/fakestore";
 
 function AuthProvider({ children }) {
